@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="scan_check_suite_check">
+    <scan_check_suite_check action="INSERT_OR_UPDATE">
+        <check display_value="TC Check List Control Translations">884c2f051b0e25107eb06464604bcbe4</check>
+        <score_weight>1</score_weight>
+        <suite display_value="Translation Check">3fe7bac51b4a25107eb06464604bcb23</suite>
+        <sys_class_name>scan_check_suite_check</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-04-05 18:42:53</sys_created_on>
+        <sys_id>cfb63b011b4e25107eb06464604bcb9d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Translation Check" source="x_424426_tc">c0f636811b4a25107eb06464604bcbb0</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Translation Check">c0f636811b4a25107eb06464604bcbb0</sys_scope>
+        <sys_update_name>scan_check_suite_check_cfb63b011b4e25107eb06464604bcb9d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-04-05 18:42:53</sys_updated_on>
+    </scan_check_suite_check>
+</record_update>
