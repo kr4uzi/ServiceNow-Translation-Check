@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>If empty, all translation relevant languages (sys_language) will be considered.&#13;
+If not empty, this property's value (comma sparated list of iso-language codes) will be used.&#13;
+Further information: https://docs.servicenow.com/csh?version=latest&amp;topicname=r_LanguagesTable</description>
+        <ignore_cache>true</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_424426_tc.checked_languages</name>
+        <read_roles/>
+        <suffix>checked_languages</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-05-21 19:12:22</sys_created_on>
+        <sys_id>ae85f0c897432110d70ef207f053affe</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>x_424426_tc.checked_languages</sys_name>
+        <sys_package display_value="Translation Check" source="x_424426_tc">c0f636811b4a25107eb06464604bcbb0</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Translation Check">c0f636811b4a25107eb06464604bcbb0</sys_scope>
+        <sys_update_name>sys_properties_ae85f0c897432110d70ef207f053affe</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-05-21 19:22:10</sys_updated_on>
+        <type>string</type>
+        <value/>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=ae85f0c897432110d70ef207f053affe"/>
+</record_update>

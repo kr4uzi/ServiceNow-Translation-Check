@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_424426_tc.TCUtility</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>TCUtility</name>
+        <script><![CDATA[var TCUtility = Class.create();
+TCUtility.prototype = {
+    initialize: function() {
+		this.languages = this._getLanguages();
+    },
+	
+	_getLanguages: function () {
+		const propertyLang = gs.getProperty('x_424426_tc.checked_languages');
+		if (propertyLang) {
+			return propertyLang.split(',').map(x => x.trim());
+		}
+		
+		let languages = [];
+		let languageGr = new GlideAggregate('sys_language');
+		languageGr.addQuery('active', true);
+		languageGr.addAggregate('COUNT');
+		languageGr.query();
+		while (languageGr.next()) {
+			return languages.push(languageGr.getValue('id'));
+		}
+		
+		return languages;
+	},
+	
+	getLanguages: function () {
+		return [].concat(this.languages);
+	},
+
+    type: 'TCUtility'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-05-21 19:26:23</sys_created_on>
+        <sys_id>03e4b88897432110d70ef207f053af7d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>TCUtility</sys_name>
+        <sys_package display_value="Translation Check" source="x_424426_tc">c0f636811b4a25107eb06464604bcbb0</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Translation Check">c0f636811b4a25107eb06464604bcbb0</sys_scope>
+        <sys_update_name>sys_script_include_03e4b88897432110d70ef207f053af7d</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-05-21 19:26:23</sys_updated_on>
+    </sys_script_include>
+</record_update>

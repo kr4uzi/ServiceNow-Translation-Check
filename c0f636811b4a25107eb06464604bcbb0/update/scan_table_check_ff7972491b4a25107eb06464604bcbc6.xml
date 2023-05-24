@@ -18,24 +18,11 @@
         <score_max>100</score_max>
         <score_min>0</score_min>
         <score_scale>1</score_scale>
-        <script><![CDATA[/* global engine, GlideAggregate */
+        <script><![CDATA[/* global x_424426_tc, engine, GlideAggregate */
 /* eslint no-undef: "error" */
 (function (engine) {
 	
-	var numLanguages = (function () {
-		var languageGa = new GlideAggregate('sys_language');
-		languageGa.addQuery('active', true);
-		languageGa.addAggregate('COUNT');
-		languageGa.query();
-		if (languageGa.next()) {
-			return +languageGa.getAggregate('COUNT');
-		}
-		
-		return 0;
-	})();
-
     var dictionaryGr = engine.current;
-	
 	var choiceTable = dictionaryGr.name.toString();
 	var choiceField = dictionaryGr.column_label.toString();
 	// choice tables not checked for the moment - if a column is using a choice table, 
@@ -45,19 +32,28 @@
 // 		choiceField = dictionaryGr.choice_field.toString();
 // 	}
 	
-	var choiceGa = new GlideAggregate('sys_choice');
-	choiceGa.addQuery('name', choiceTable);
-	choiceGa.addQuery('element', choiceField);
-	choiceGa.addQuery('inactive', false);
-	choiceGa.groupBy('value');
-	choiceGa.groupBy('dependent_value');
-	choiceGa.addAggregate('COUNT');
-	choiceGa.query();
-	while (choiceGa.next()) {
-		var numTranslatedChoices = +choiceGa.getAggregate('COUNT');
-		if (numTranslatedChoices > 0 && numTranslatedChoices != numLanguages) {
-			engine.finding.increment();
-			return;
+	const languages = new x_424426_tc.TCUtility().getLanguages();
+	if (languages.length) {
+		var choiceGa = new GlideAggregate('sys_choice');
+		choiceGa.addQuery('name', choiceTable);
+		choiceGa.addQuery('element', choiceField);
+		choiceGa.addQuery('inactive', false);
+
+		const langCond = choiceGa.addQuery('language', languages[0]);
+		langCond.slice(1).forEach(l => langCond.addOrCondition('language', l));
+
+		choiceGa.groupBy('value');
+		choiceGa.groupBy('dependent_value');
+		choiceGa.addAggregate('COUNT');
+		choiceGa.query();
+		while (choiceGa.next()) {
+			var numTranslatedChoices = +choiceGa.getAggregate('COUNT');
+			if (numTranslatedChoices > 0 && numTranslatedChoices != languages.length) {
+				engine.finding.increment();
+				// break up when the first missing translation is found:
+				// no use to mark the choice more than once
+				return;
+			}
 		}
 	}
 
@@ -67,14 +63,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2023-04-05 17:17:47</sys_created_on>
         <sys_id>ff7972491b4a25107eb06464604bcbc6</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>TC Check Choice Translations</sys_name>
         <sys_package display_value="Translation Check" source="x_424426_tc">c0f636811b4a25107eb06464604bcbb0</sys_package>
         <sys_policy/>
         <sys_scope display_value="Translation Check">c0f636811b4a25107eb06464604bcbb0</sys_scope>
         <sys_update_name>scan_table_check_ff7972491b4a25107eb06464604bcbc6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2023-04-05 17:50:46</sys_updated_on>
+        <sys_updated_on>2023-05-21 20:18:39</sys_updated_on>
         <table>sys_dictionary</table>
         <use_manifest>false</use_manifest>
     </scan_table_check>
